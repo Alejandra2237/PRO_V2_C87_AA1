@@ -8,10 +8,10 @@ const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
   return (
-    <Drawer.Navigator screenOptions={{ headerShown: false }}>
-      <Drawer.Screen name="Inicio" component={StackNavigator} />
-      <Drawer.Screen name="Perfil" component={Profile} />
-      <Drawer.Screen name="CierreSesion" component={Logout} />
+    <Drawer.Navigator screenOptions={{headerShown:false}}>
+      <Drawer.Screen name="Login" component={StackNavigator} />
+      <Drawer.Screen name="Profile" component={Profile} />
+      <Drawer.Screen name="Logout" component={Logout} />
     </Drawer.Navigator>
   );
 };
