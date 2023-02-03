@@ -29,7 +29,8 @@ export default class Feed extends Component {
     super(props);
     this.state = {
       fontsLoaded: false,
-      light_theme: true
+      light_theme: true,
+      stories: []
     };
   }
 
@@ -42,6 +43,7 @@ export default class Feed extends Component {
     this._loadFontsAsync();
     this.fetchUser();
   }
+
 
   fetchUser = () => {
     let theme;
@@ -85,17 +87,31 @@ export default class Feed extends Component {
                     : styles.appTitleText
                 }
               >
-                Aoo para contar historias
+               App para contar historias
               </Text>
             </View>
           </View>
-          <View style={styles.cardContainer}>
-            <FlatList
-              keyExtractor={this.keyExtractor}
-              data={stories}
-              renderItem={this.renderItem}
-            />
-          </View>
+          {!this.state.stories[0] ? (
+            <View style={styles.noStories}>
+              <Text
+                style={
+                  this.state.light_theme
+                    ? styles.noStoriesTextLight
+                    : styles.noStoriesText
+                }
+              >
+                No hay historias disponibles
+              </Text>
+            </View>
+          ) : (
+            <View style={styles.cardContainer}>
+              <FlatList
+                keyExtractor={this.keyExtractor}
+                data={this.state.stories}
+                renderItem={this.renderItem}
+              />
+            </View>
+          )}
           <View style={{ flex: 0.08 }} />
         </View>
       );
@@ -145,5 +161,19 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     flex: 0.85
+  },
+  noStories: {
+    flex: 0.85,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  noStoriesTextLight: {
+    fontSize: RFValue(40),
+    fontFamily: "Bubblegum-Sans"
+  },
+  noStoriesText: {
+    color: "white",
+    fontSize: RFValue(40),
+    fontFamily: "Bubblegum-Sans"
   }
 });
